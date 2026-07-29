@@ -1,7 +1,7 @@
 ---
 title: "Тестовый рассказ"
 date: 2026-07-29
-cover: "/images/default-cover.jpg"
+cover: ""
 accent_color: "#6BCB77"
 author: "Иван Иванов"
 tags: ["фантастика", "тест"]
