@@ -2,9 +2,6 @@ baseURL = "https://worfinka.github.io/tastyink/"
 defaultContentLanguage = "ru"
 title = "TastyInk"
 
-[permalinks]
-  stories = "/:language/stories/:slug/"
-
 [languages]
   [languages.ru]
     title = "TastyInk"
