@@ -1,38 +1,25 @@
 baseURL = "https://worfinka.github.io/tastyink/"
-languageCode = "ru"
+defaultContentLanguage = "ru"
 title = "TastyInk"
-theme = ""
 
-# Включаем красивые URL (без .html)
 [permalinks]
   stories = "/:language/stories/:slug/"
-
-# Мультиязычность
-defaultContentLanguage = "ru"
 
 [languages]
   [languages.ru]
     title = "TastyInk"
     weight = 1
-    languageName = "Русский"
+    label = "Русский"
   [languages.en]
     title = "TastyInk"
     weight = 2
-    languageName = "English"
+    label = "English"
 
-# Настройка папок с контентом
-[module]
-  [[module.mounts]]
-    source = "content"
-    target = "content"
-
-# Настройки для картинок (чтобы Hugo обрабатывал их)
 [imaging]
   resampleFilter = "box"
   quality = 85
   anchor = "smart"
 
-# Включаем карту сайта и RSS
 [sitemap]
   changefreq = "weekly"
   priority = 0.5
