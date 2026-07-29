@@ -6,9 +6,9 @@
     <meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
     <meta name="theme-color" content="{{ .Params.accent_color | default "#ffffff" }}">
     <title>{{ .Title }} - TastyInk</title>
-    <link rel="stylesheet" href="{{ "style.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "style.css" | absURL }}">
     {{ with .Params.cover }}
-        <link rel="icon" type="image/jpeg" href="{{ . | relURL }}">
+        <link rel="icon" type="image/jpeg" href="{{ . | absURL }}">
     {{ end }}
 
     <!-- Мета-теги для соцсетей -->
@@ -37,8 +37,8 @@
 
     <!-- Шапка -->
     <header class="top-header">
-        <a href="{{ "" | relLangURL }}" class="logo">
-            <img src="{{ "logo.svg" | relURL }}" alt="Slicetown">
+        <a href="{{ "" | absURL }}" class="logo">
+            <img src="{{ "logo.svg" | absURL }}" alt="TastyInk">
         </a>
         <div class="page-title">. story</div>
         <div></div>
@@ -50,9 +50,9 @@
         <!-- Блок с обложкой и метаданными -->
         <section class="story-header">
             {{ with .Params.cover }}
-                <img id="cover" class="story-cover" src="{{ . | relURL }}" alt="{{ $.Title }}">
+                <img id="cover" class="story-cover" src="{{ . | absURL }}" alt="{{ $.Title }}">
             {{ else }}
-                <img id="cover" class="story-cover" src="{{ "images/default-cover.jpg" | relURL }}" alt="No cover">
+                <img id="cover" class="story-cover" src="{{ "images/default-cover.jpg" | absURL }}" alt="No cover">
             {{ end }}
             <div class="story-meta">
                 <h1 id="story-title" style="color: {{ .Params.accent_color | default "#ffffff" }};">{{ .Title }}</h1>
