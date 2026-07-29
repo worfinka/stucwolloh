@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TastyInk — журнал коротких рассказов</title>
-    <link rel="stylesheet" href="{{ "style.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "style.css" | absURL }}">
 </head>
 <body>
 <div class="page">
     <header class="top-header">
         <a href="/" class="logo">
-            <img src="{{ "logo.svg" | relURL }}" alt="Slicetown">
+            <img src="{{ "logo.svg" | absURL }}" alt="TastyInk">
         </a>
         <div class="page-title">. home</div>
         <div></div>
@@ -21,7 +21,7 @@
 
         {{ range .Site.Languages }}
             <h2 style="font-weight: 300; font-size: 32px; margin: 40px 0 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
-                {{ .LanguageName }}
+                {{ .Label }}
             </h2>
             <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
                 {{ range where $.Site.RegularPages "Section" "stories" }}
@@ -29,7 +29,7 @@
                         <li style="background: rgba(255,255,255,0.03); border-radius: 12px; overflow: hidden; transition: 0.2s;">
                             <a href="{{ .Permalink }}" style="display: block; text-decoration: none; color: inherit;">
                                 {{ with .Params.cover }}
-                                    <img src="{{ . | relURL }}" alt="{{ $.Title }}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #111;">
+                                    <img src="{{ . | absURL }}" alt="{{ $.Title }}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #111;">
                                 {{ else }}
                                     <div style="width: 100%; aspect-ratio: 16/9; background: #222; display: flex; align-items: center; justify-content: center; color: #555;">без обложки</div>
                                 {{ end }}
