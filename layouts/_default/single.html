@@ -52,7 +52,7 @@
             {{ with .Params.cover }}
                 <img id="cover" class="story-cover" src="{{ . | absURL }}" alt="{{ $.Title }}">
             {{ else }}
-                <img id="cover" class="story-cover" src="{{ "images/default-cover.jpg" | relURL }}" alt="No cover">
+                <img id="cover" class="story-cover" src="/tastyink/images/default-cover.jpg" alt="No cover">
             {{ end }}
             <div class="story-meta">
                 <h1 id="story-title" style="color: {{ .Params.accent_color | default "#ffffff" }};">{{ .Title }}</h1>
