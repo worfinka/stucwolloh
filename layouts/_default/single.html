@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
+    <meta name="theme-color" content="{{ .Params.accent_color | default "#ffffff" }}">
+    <title>{{ .Title }} - TastyInk</title>
+    <link rel="stylesheet" href="{{ "style.css" | relURL }}">
+    {{ with .Params.cover }}
+        <link rel="icon" type="image/jpeg" href="{{ . | relURL }}">
+    {{ end }}
+
+    <!-- Мета-теги для соцсетей -->
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
+    {{ with .Params.cover }}
+        <meta property="og:image" content="{{ . | absURL }}">
+    {{ end }}
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <!-- Если есть переводы -->
+    {{ if .IsTranslated }}
+        {{ range .Translations }}
+            <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+        {{ end }}
+    {{ end }}
+</head>
+<body>
+<div id="top"></div>
+<div class="page">
+
+    <!-- Параллакс-текст (фон) -->
+    <div id="parallax-text">
+        {{ .Title | upper }} {{ .Title | upper }} {{ .Title | upper }} {{ .Title | upper }}
+    </div>
+
+    <!-- Шапка -->
+    <header class="top-header">
+        <a href="{{ "" | relLangURL }}" class="logo">
+            <img src="{{ "logo.svg" | relURL }}" alt="Slicetown">
+        </a>
+        <div class="page-title">. story</div>
+        <div></div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="story-layout">
+
+        <!-- Блок с обложкой и метаданными -->
+        <section class="story-header">
+            {{ with .Params.cover }}
+                <img id="cover" class="story-cover" src="{{ . | relURL }}" alt="{{ $.Title }}">
+            {{ else }}
+                <img id="cover" class="story-cover" src="{{ "images/default-cover.jpg" | relURL }}" alt="No cover">
+            {{ end }}
+            <div class="story-meta">
+                <h1 id="story-title" style="color: {{ .Params.accent_color | default "#ffffff" }};">{{ .Title }}</h1>
+                <div class="story-description" style="color: {{ .Params.accent_color | default "#ffffff" }};">
+                    {{ with .Params.author }}<p>Автор: {{ . }}</p>{{ end }}
+                    {{ with .Params.tags }}
+                        <p>Теги: {{ delimit . ", " }}</p>
+                    {{ end }}
+                    {{ if .Params.age_rating }}
+                        <p style="color: #ff6b6b;">🔞 18+</p>
+                    {{ end }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Цитата (если есть в frontmatter) -->
+        {{ with .Params.quote }}
+        <section class="quote-block">
+            <div class="quote-main">
+                <span class="quote-mark">“</span>
+                <p class="quote-text">{{ . }}</p>
+            </div>
+        </section>
+        {{ end }}
+
+        <!-- Заметка автора (если есть) -->
+        {{ with .Params.author_note }}
+        <section id="author-note" class="story-author-note">
+            {{ . | markdownify }}
+        </section>
+        {{ end }}
+
+        <!-- Полный текст рассказа -->
+        <section id="story-text" class="story-text" style="color: {{ .Params.accent_color | default "#ffffff" }};">
+            {{ .Content }}
+        </section>
+
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        © <span id="copyright-year"></span> TastyInk, авторский проект
+        <br>Все права на текст принадлежат автору
+    </footer>
+
+</div>
+
+<!-- Скрипты -->
+<script>
+    // Параллакс для фоновой надписи
+    (function() {
+        const wall = document.getElementById('parallax-text');
+        if (wall) {
+            window.addEventListener('scroll', function() {
+                wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+            });
+        }
+    })();
+
+    // Автоматическое обновление года в копирайте
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearSpan = document.getElementById('copyright-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    });
+</script>
+
+</body>
+</html>
