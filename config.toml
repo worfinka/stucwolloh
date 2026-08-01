@@ -1,6 +1,7 @@
 baseURL = "https://worfinka.github.io/tastyink/"
 defaultContentLanguage = "ru"
 title = "TastyInk"
+relativeURLs = false
 
 [languages]
   [languages.ru]
