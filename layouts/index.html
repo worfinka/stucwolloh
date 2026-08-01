@@ -6,13 +6,13 @@
     <meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
     <meta name="theme-color" content="{{ .Params.accent_color | default "#ffffff" }}">
     <title>{{ .Title }} - TastyInk</title>
-    <!-- Явный путь к CSS -->
-    <link rel="stylesheet" href="/tastyink/style.css">
+    <!-- Полная ссылка на CSS -->
+    <link rel="stylesheet" href="https://worfinka.github.io/tastyink/style.css">
     {{ with .Params.cover }}
-        <link rel="icon" type="image/jpeg" href="/tastyink{{ . }}">
+        <link rel="icon" type="image/jpeg" href="https://worfinka.github.io/tastyink{{ . }}">
     {{ end }}
 
-    <!-- Open Graph (absURL оставляем только тут, для соцсетей) -->
+    <!-- Open Graph (используем absURL для правильного полного URL) -->
     <meta property="og:title" content="{{ .Title }}">
     <meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
     <meta property="og:type" content="article">
@@ -52,8 +52,8 @@
     <!-- ШАПКА -->
     <header class="top-header">
         <a href="{{ "/" | relLangURL }}" class="logo">
-            <!-- Явный путь к логотипу -->
-            <img src="/tastyink/logo.svg" alt="TastyInk">
+            <!-- Полная ссылка на логотип -->
+            <img src="https://worfinka.github.io/tastyink/logo.svg" alt="TastyInk">
         </a>
         <div class="page-title">
             {{ if eq .Language.Lang "en" }}. story{{ else }}. рассказ{{ end }}
@@ -66,11 +66,11 @@
 
         <section class="story-header">
             {{ with .Params.cover }}
-                <!-- Пользовательские обложки – подставляем /tastyink перед путём -->
-                <img id="cover" class="story-cover" src="/tastyink{{ . }}" alt="{{ $.Title }}" itemprop="image">
+                <!-- Полная ссылка на пользовательскую обложку -->
+                <img id="cover" class="story-cover" src="https://worfinka.github.io/tastyink{{ . }}" alt="{{ $.Title }}" itemprop="image">
             {{ else }}
-                <!-- Явный путь к дефолтной обложке -->
-                <img id="cover" class="story-cover" src="/tastyink/images/default-cover.jpg" alt="No cover" itemprop="image">
+                <!-- Полная ссылка на дефолтную обложку -->
+                <img id="cover" class="story-cover" src="https://worfinka.github.io/tastyink/images/default-cover.jpg" alt="No cover" itemprop="image">
             {{ end }}
             <div class="story-meta">
                 <h1 id="story-title" style="color: {{ .Params.accent_color | default "#ffffff" }};" itemprop="headline">{{ .Title }}</h1>
