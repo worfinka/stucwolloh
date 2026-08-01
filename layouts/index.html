@@ -1,66 +1,168 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}">
+<html lang="{{ .Language.Lang }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TastyInk — журнал коротких рассказов</title>
-    <link rel="stylesheet" href="{{ "style.css" | absURL }}">
+    <meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
+    <meta name="theme-color" content="{{ .Params.accent_color | default "#ffffff" }}">
+    <title>{{ .Title }} - TastyInk</title>
+    <!-- Явный путь к CSS -->
+    <link rel="stylesheet" href="/tastyink/style.css">
+    {{ with .Params.cover }}
+        <link rel="icon" type="image/jpeg" href="/tastyink{{ . }}">
+    {{ end }}
+
+    <!-- Open Graph (absURL оставляем только тут, для соцсетей) -->
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ .Permalink }}">
+    {{ $cover := .Params.cover | default "/images/default-cover.jpg" }}
+    <meta property="og:image" content="{{ $cover | absURL }}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    {{ if .IsTranslated }}
+        {{ range .Translations }}
+            <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+        {{ end }}
+    {{ end }}
 </head>
 <body>
+<div id="top"></div>
 <div class="page">
+
+    <!-- ПАРАЛЛАКС-ТЕКСТ -->
+    {{ $baseText := .Title }}
+    {{ with .Params.tags }}
+        {{ $baseText = printf "%s %s" $baseText (delimit . " ") }}
+    {{ end }}
+    {{ $baseText = upper $baseText }}
+    {{ $textLen := len $baseText }}
+    {{ $repeatCount := 3 }}
+    {{ if lt $textLen 100 }}
+        {{ $repeatCount = 5 }}
+    {{ else if lt $textLen 200 }}
+        {{ $repeatCount = 4 }}
+    {{ end }}
+    {{ $parallaxText := strings.Repeat $repeatCount (printf "%s " $baseText) }}
+    <div id="parallax-text">
+        {{ $parallaxText }}
+    </div>
+
+    <!-- ШАПКА -->
     <header class="top-header">
-        <a href="/" class="logo">
-            <img src="{{ "logo.svg" | absURL }}" alt="TastyInk">
+        <a href="{{ "/" | relLangURL }}" class="logo">
+            <!-- Явный путь к логотипу -->
+            <img src="/tastyink/logo.svg" alt="TastyInk">
         </a>
-        <div class="page-title">. home</div>
+        <div class="page-title">
+            {{ if eq .Language.Lang "en" }}. story{{ else }}. рассказ{{ end }}
+        </div>
         <div></div>
     </header>
 
-    <main style="position: relative; z-index: 2;">
-        <h1 style="font-weight: 300; font-size: 48px; margin-bottom: 20px;">📖 Все рассказы</h1>
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="story-layout" itemscope itemtype="http://schema.org/Article">
 
-        {{ range .Site.Languages }}
-            <h2 style="font-weight: 300; font-size: 32px; margin: 40px 0 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
-                {{ .Label }}
-            </h2>
-            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-                {{ range where $.Site.RegularPages "Section" "stories" }}
-                    {{ if eq .Language.Lang $.Lang }}
-                        <li style="background: rgba(255,255,255,0.03); border-radius: 12px; overflow: hidden; transition: 0.2s;">
-                            <a href="{{ .Permalink }}" style="display: block; text-decoration: none; color: inherit;">
-                                {{ with .Params.cover }}
-                                    <img src="{{ . | absURL }}" alt="{{ $.Title }}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #111;">
-                                {{ else }}
-                                    <div style="width: 100%; aspect-ratio: 16/9; background: #222; display: flex; align-items: center; justify-content: center; color: #555;">без обложки</div>
-                                {{ end }}
-                                <div style="padding: 14px;">
-                                    <h3 style="margin: 0 0 4px; font-weight: 400; font-size: 22px; color: {{ .Params.accent_color | default "#ffffff" }};">{{ .Title }}</h3>
-                                    {{ with .Params.author }}
-                                        <p style="margin: 0; font-size: 14px; color: #aaa;">{{ . }}</p>
-                                    {{ end }}
-                                    <p style="margin: 6px 0 0; font-size: 14px; color: #666;">{{ .Summary | plainify | truncate 80 }}</p>
-                                    {{ if .Params.tags }}
-                                        <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px;">
-                                            {{ range .Params.tags }}
-                                                <span style="background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 20px; font-size: 12px; color: #ccc;">{{ . }}</span>
-                                            {{ end }}
-                                        </div>
-                                    {{ end }}
-                                </div>
-                            </a>
-                        </li>
+        <section class="story-header">
+            {{ with .Params.cover }}
+                <!-- Пользовательские обложки – подставляем /tastyink перед путём -->
+                <img id="cover" class="story-cover" src="/tastyink{{ . }}" alt="{{ $.Title }}" itemprop="image">
+            {{ else }}
+                <!-- Явный путь к дефолтной обложке -->
+                <img id="cover" class="story-cover" src="/tastyink/images/default-cover.jpg" alt="No cover" itemprop="image">
+            {{ end }}
+            <div class="story-meta">
+                <h1 id="story-title" style="color: {{ .Params.accent_color | default "#ffffff" }};" itemprop="headline">{{ .Title }}</h1>
+                <div class="story-description">
+                    {{ with .Params.author }}
+                        <p itemprop="author">
+                            {{ if eq $.Language.Lang "en" }}Author:{{ else }}Автор:{{ end }} {{ . }}
+                        </p>
                     {{ end }}
-                {{ end }}
-            </ul>
+                    {{ with .Params.tags }}
+                        <p>
+                            {{ if eq $.Language.Lang "en" }}Tags:{{ else }}Теги:{{ end }} {{ delimit . ", " }}
+                        </p>
+                    {{ end }}
+                    {{ if .Params.age_rating }}
+                        <p style="color: #ff6b6b;">18+</p>
+                    {{ end }}
+                    <!-- Тип рассказа -->
+                    <p style="color: #aaa; font-size: 0.9em; margin-top: 6px;">
+                        {{ $wc := .WordCount }}
+                        {{ if eq $wc 100 }}
+                            {{ if eq $.Language.Lang "en" }}Drabble (exactly 100 words){{ else }}Драббл (ровно 100 слов){{ end }}
+                        {{ else if le $wc 50 }}
+                            {{ if eq $.Language.Lang "en" }}Mini-saga / Dribble (≤50 words){{ else }}Мини-сага / Дриббл (≤50 слов){{ end }}
+                        {{ else if lt $wc 100 }}
+                            {{ if eq $.Language.Lang "en" }}Micro-fiction (<100 words){{ else }}Микро-фикшн (<100 слов){{ end }}
+                        {{ else if le $wc 750 }}
+                            {{ if eq $.Language.Lang "en" }}Sudden fiction (≤750 words){{ else }}Садден-фикшн (≤750 слов){{ end }}
+                        {{ else if le $wc 1500 }}
+                            {{ if eq $.Language.Lang "en" }}Flash fiction (750–1500 words){{ else }}Флэш-фикшн (750–1500 слов){{ end }}
+                        {{ else }}
+                            {{ if eq $.Language.Lang "en" }}Short story (>1500 words){{ else }}Короткий рассказ (>1500 слов){{ end }}
+                        {{ end }}
+                    </p>
+                    <!-- Ссылка на перевод -->
+                    {{ if .IsTranslated }}
+                        {{ range .Translations }}
+                            <p style="margin-top: 8px; font-size: 0.9em;">
+                                {{ if eq $.Language.Lang "en" }}
+                                    This story is available in {{ .Language.LanguageName }} – <a href="{{ .Permalink }}" style="color: {{ $.Params.accent_color | default "#ffffff" }};">here</a>
+                                {{ else }}
+                                    Этот рассказ доступен на {{ .Language.LanguageName }} – <a href="{{ .Permalink }}" style="color: {{ $.Params.accent_color | default "#ffffff" }};">здесь</a>
+                                {{ end }}
+                            </p>
+                        {{ end }}
+                    {{ end }}
+                </div>
+            </div>
+        </section>
+
+        {{ with .Params.quote }}
+        <section class="quote-block">
+            <div class="quote-main">
+                <span class="quote-mark" style="color: {{ $.Params.accent_color | default "#ffffff" }};">“</span>
+                <p class="quote-text" style="color: {{ $.Params.accent_color | default "#ffffff" }};">{{ . }}</p>
+            </div>
+        </section>
         {{ end }}
+
+        {{ with .Params.author_note }}
+        <section id="author-note" class="story-author-note">
+            {{ . | markdownify }}
+        </section>
+        {{ end }}
+
+        <section id="story-text" class="story-text" itemprop="articleBody">
+            {{ .Content }}
+        </section>
+
     </main>
 
+    <!-- ПОДВАЛ -->
     <footer>
-        © <span id="copyright-year"></span> TastyInk, авторский проект
+        © <span id="copyright-year"></span> TastyInk
+        {{ if eq .Language.Lang "en" }}– author's project{{ else }}– авторский проект{{ end }}
+        <br>
+        {{ if eq .Language.Lang "en" }}All rights to the text belong to the author{{ else }}Все права на текст принадлежат автору{{ end }}
     </footer>
+
 </div>
 
+<!-- СКРИПТЫ -->
 <script>
+    (function() {
+        const wall = document.getElementById('parallax-text');
+        if (wall) {
+            window.addEventListener('scroll', function() {
+                wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+            });
+        }
+    })();
+
     document.addEventListener('DOMContentLoaded', function() {
         const yearSpan = document.getElementById('copyright-year');
         if (yearSpan) {
@@ -68,5 +170,6 @@
         }
     });
 </script>
+
 </body>
 </html>
