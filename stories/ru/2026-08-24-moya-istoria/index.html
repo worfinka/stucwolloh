@@ -9,15 +9,21 @@
     <!-- CSS из корня -->
     <link rel="stylesheet" href="/style.css">
     <!-- Иконка (обложка) -->
-    <link rel="icon" type="image/jpeg" href="/images/cover-story1.jpg">
+    <link rel="icon" type="image/jpeg" href="/images/default-cover.jpg">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Моя первая история">
     <meta property="og:description" content="Короткий рассказ о том, как технологии меняют восприятие реальности.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://hollowcuts.com/stories/ru/2026-08-24-moya-istoria/">
-    <meta property="og:image" content="https://hollowcuts.com/images/cover-story1.jpg">
+    <meta property="og:image" content="https://hollowcuts.com/images/default-cover.jpg">
     <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Передаём данные о текущей истории в JS через data-атрибуты -->
+    <meta id="story-data" 
+          data-lang="ru" 
+          data-id="2026-08-24-moya-istoria" 
+          data-other-lang="en">
 </head>
 <body>
 <div id="top"></div>
@@ -49,10 +55,8 @@
                     <p>Теги: фантастика, технологии</p>
                     <p>18+</p>
                     <p style="color: #aaa; font-size: 0.9em; margin-top: 6px;">Драббл</p>
-                    <!-- Ссылка на перевод (если есть) -->
-                    <p style="color: #aaa; margin-top: 8px; font-size: 0.9em;">
-                        Эта история доступна на английском – <a href="/stories/en/2026-08-24-my-story/" style="color: #6BCB77;">здесь</a>
-                    </p>
+                    <!-- Контейнер для динамической ссылки на перевод -->
+                    <p id="translation-link" style="color: #aaa; margin-top: 8px; font-size: 0.9em;"></p>
                 </div>
             </div>
         </section>
@@ -92,20 +96,56 @@
 <!-- СКРИПТЫ -->
 <script>
     (function() {
+        // Параллакс
         const wall = document.getElementById('parallax-text');
         if (wall) {
             window.addEventListener('scroll', function() {
                 wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
             });
         }
-    })();
 
-    document.addEventListener('DOMContentLoaded', function() {
+        // Год в подвале
         const yearSpan = document.getElementById('copyright-year');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();
         }
-    });
+
+        // Проверка наличия перевода
+        const storyData = document.getElementById('story-data');
+        if (storyData) {
+            const currentLang = storyData.dataset.lang;      // "ru"
+            const currentId = storyData.dataset.id;          // "2026-08-24-moya-istoria"
+            const otherLang = storyData.dataset.otherLang;   // "en"
+
+            // Загружаем JSON для другого языка
+            const jsonUrl = `/content/${otherLang}/stories.json`;
+            fetch(jsonUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error('JSON not found');
+                    return res.json();
+                })
+                .then(data => {
+                    // Ищем историю с таким же id (или любым общим ключом)
+                    // Предполагаем, что в JSON у каждой истории есть поле "id"
+                    const translation = data.stories.find(s => s.id === currentId);
+                    if (translation) {
+                        // Если нашли, выводим ссылку
+                        const linkContainer = document.getElementById('translation-link');
+                        const linkText = (currentLang === 'ru') 
+                            ? 'Эта история доступна на английском – <a href="' + translation.url + '" style="color: #6BCB77;">здесь</a>'
+                            : 'This story is available in Russian – <a href="' + translation.url + '" style="color: #6BCB77;">here</a>';
+                        linkContainer.innerHTML = linkText;
+                    } else {
+                        // Если перевода нет, ничего не показываем (или скрываем блок)
+                        document.getElementById('translation-link').style.display = 'none';
+                    }
+                })
+                .catch(() => {
+                    // Если JSON не загрузился (например, нет такого языка), просто скрываем
+                    document.getElementById('translation-link').style.display = 'none';
+                });
+        }
+    })();
 </script>
 
 </body>
