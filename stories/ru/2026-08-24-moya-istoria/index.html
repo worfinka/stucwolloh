@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Короткий рассказ о том, как технологии меняют восприятие реальности.">
+    <meta name="theme-color" content="#6BCB77">
+    <title>Моя первая история — Hollow Cuts</title>
+    <!-- CSS из корня -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Иконка (обложка) -->
+    <link rel="icon" type="image/jpeg" href="/images/cover-story1.jpg">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Моя первая история">
+    <meta property="og:description" content="Короткий рассказ о том, как технологии меняют восприятие реальности.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hollowcuts.com/stories/ru/2026-08-24-moya-istoria/">
+    <meta property="og:image" content="https://hollowcuts.com/images/cover-story1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<div id="top"></div>
+<div class="page">
+
+    <!-- ПАРАЛЛАКС-ТЕКСТ -->
+    <div id="parallax-text">
+        МОЯ ПЕРВАЯ ИСТОРИЯ ФАНТАСТИКА ТЕХНОЛОГИИ МОЯ ПЕРВАЯ ИСТОРИЯ ФАНТАСТИКА ТЕХНОЛОГИИ МОЯ ПЕРВАЯ ИСТОРИЯ ФАНТАСТИКА ТЕХНОЛОГИИ МОЯ ПЕРВАЯ ИСТОРИЯ ФАНТАСТИКА ТЕХНОЛОГИИ МОЯ ПЕРВАЯ ИСТОРИЯ ФАНТАСТИКА ТЕХНОЛОГИИ 
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="top-header">
+        <a href="/" class="logo">
+            <img src="/logo.svg" alt="Hollow Cuts">
+        </a>
+        <div class="page-title">. рассказ</div>
+        <div></div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="story-layout" itemscope itemtype="http://schema.org/Article">
+
+        <section class="story-header">
+            <img id="cover" class="story-cover" src="/images/cover-story1.jpg" alt="Моя первая история" itemprop="image">
+            <div class="story-meta">
+                <h1 id="story-title" style="color: #6BCB77;" itemprop="headline">Моя первая история</h1>
+                <div class="story-description">
+                    <p itemprop="author">Автор: Алексей Иванов</p>
+                    <p>Теги: фантастика, технологии</p>
+                    <p style="color: #ff6b6b;">18+</p>
+                    <p style="color: #aaa; font-size: 0.9em; margin-top: 6px;">Драббл (ровно 100 слов)</p>
+                    <!-- Ссылка на перевод (если есть) -->
+                    <p style="margin-top: 8px; font-size: 0.9em;">
+                        Этот рассказ доступен на English – <a href="/stories/en/2026-08-24-my-story/" style="color: #6BCB77;">здесь</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Цитата -->
+        <section class="quote-block">
+            <div class="quote-main">
+                <span class="quote-mark" style="color: #6BCB77;">“</span>
+                <p class="quote-text" style="color: #6BCB77;">Технологии — это всего лишь инструмент, а реальность остаётся за пределами экрана.</p>
+            </div>
+        </section>
+
+        <!-- Заметка автора -->
+        <section id="author-note" class="story-author-note">
+            Этот рассказ был написан в рамках эксперимента по созданию гиперреалистичных миров. Автор делится личным опытом.
+        </section>
+
+        <!-- Полный текст -->
+        <section id="story-text" class="story-text" itemprop="articleBody">
+            <p>Он открыл глаза и понял, что мир вокруг — не более чем симуляция. Но это открытие не принесло облегчения. Наоборот, оно лишило его последней иллюзии.</p>
+            <p>Каждый день он просыпался в одной и той же комнате, смотрел в окно на неизменно яркое солнце и чувствовал, как что-то ускользает. Что-то важное, что делало его человеком.</p>
+            <p>Технологии научились воспроизводить всё: запахи, эмоции, даже боль. Но они не могли воспроизвести подлинность. Ту самую, что рождается из хаоса, из ошибок, из случайных встреч.</p>
+            <p>Он решил сбежать. Не в другой мир, а в себя. Туда, где ещё оставался шёпот настоящего.</p>
+            <p>И в этом шёпоте он нашёл ответ: реальность не нужно искать – её нужно создавать заново каждый миг.</p>
+        </section>
+
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        © <span id="copyright-year"></span> Hollow Cuts – авторский проект
+        <br>Все права на текст принадлежат автору
+    </footer>
+
+</div>
+
+<!-- СКРИПТЫ -->
+<script>
+    (function() {
+        const wall = document.getElementById('parallax-text');
+        if (wall) {
+            window.addEventListener('scroll', function() {
+                wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+            });
+        }
+    })();
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearSpan = document.getElementById('copyright-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+    });
+</script>
+
+</body>
+</html>
