@@ -7,7 +7,10 @@
       "author": "Анна Ветрова",
       "date": "2026-07-15",
       "language": "ru",
-      "tags": ["фантастика", "постапокалипсис"],
+      "tags": [
+        "фантастика",
+        "постапокалипсис"
+      ],
       "cover": "/images/2026-07-15-posledniy-svet.jpg",
       "accent_color": "#E67E22",
       "age_rating": false,
@@ -25,7 +28,10 @@
       "author": "Максим Кольцов",
       "date": "2026-07-20",
       "language": "ru",
-      "tags": ["реализм", "повседневность"],
+      "tags": [
+        "реализм",
+        "повседневность"
+      ],
       "cover": "/images/default-cover.jpg",
       "accent_color": "#3498DB",
       "age_rating": false,
@@ -42,7 +48,10 @@
       "author": "Екатерина Смирнова",
       "date": "2026-07-25",
       "language": "ru",
-      "tags": ["магический реализм", "психология"],
+      "tags": [
+        "магический реализм",
+        "психология"
+      ],
       "cover": "/images/2026-07-25-bezumnyy-poyezd.jpg",
       "accent_color": "#8E44AD",
       "age_rating": true,
@@ -52,6 +61,26 @@
       "editorial_review": "Глубокий и многослойный текст. Рекомендуется для читателей, любящих метафоры и философские подтексты.",
       "translation_id": "",
       "url": "/stories/ru/2026-07-25-bezumnyy-poyezd/"
+    },
+    {
+      "title": "wordinkasoao",
+      "author": "wordilz",
+      "content": "<p>Это тестовая история (мне не нравится))))), отправленная через Python-скрипт. Бот должен принять её и показать в чате редакции.</p>",
+      "language": "ru",
+      "tags": [
+        "тест",
+        "скрипт",
+        "автоматизация"
+      ],
+      "age_rating": true,
+      "email": "test@example.com",
+      "id": "2026-08-04-testovaya-istoriya-iz-skripta",
+      "date": "2026-08-04T18:21:17.112271",
+      "url": "/stories/ru/2026-08-04-testovaya-istoriya-iz-skripta/",
+      "word_count": 19,
+      "accepted_by": "Worfi1007",
+      "editorial_review": "не понравилось",
+      "slug": "wordinkasoao"
     }
   ]
 }
