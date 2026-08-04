@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="{{LANG}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="theme-color" content="{{THEME_COLOR}}">
+    <title>{{TITLE}} . Hollow Cuts</title>
+    <!-- CSS из корня -->
+    <link rel="stylesheet" href="/style.css">
+    <!-- Иконка (обложка) -->
+    <link rel="icon" type="image/jpeg" href="{{COVER}}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{TITLE}}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hollowcuts.com{{URL}}">
+    <meta property="og:image" content="https://hollowcuts.com{{COVER}}">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Данные для JS (язык, ID, перевод) -->
+    <meta id="story-data" 
+          data-lang="{{LANG}}" 
+          data-id="{{ID}}" 
+          data-other-lang="{{OTHER_LANG}}">
+</head>
+<body>
+<div id="top"></div>
+<div class="page">
+
+    <!-- ПАРАЛЛАКС-ТЕКСТ -->
+    <div id="parallax-text">
+        {{PARALLAX_TEXT}}
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="top-header">
+        <a href="/" class="logo">
+            <img src="/logo.svg" alt="Hollow Cuts">
+        </a>
+        <div class="page-title">
+            {{#if (eq LANG "en")}}. story{{else}}. рассказ{{/if}}
+        </div>
+        <div></div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="story-layout" itemscope itemtype="http://schema.org/Article">
+
+        <section class="story-header">
+            <img id="cover" class="story-cover" src="{{COVER}}" alt="{{TITLE}}" itemprop="image">
+            <div class="story-meta">
+                <h1 id="story-title" style="color: {{THEME_COLOR}};" itemprop="headline">{{TITLE}}</h1>
+                <div class="story-description">
+                    <p itemprop="author">
+                        {{#if (eq LANG "en")}}Author:{{else}}Автор:{{/if}} {{AUTHOR}}
+                    </p>
+                    {{#if TAGS}}
+                    <p>
+                        {{#if (eq LANG "en")}}Tags:{{else}}Теги:{{/if}} {{TAGS}}
+                    </p>
+                    {{/if}}
+                    {{#if AGE_RATING}}
+                    <p>18+</p>
+                    {{/if}}
+                    <p style="color: #aaa; font-size: 0.9em; margin-top: 6px;">{{STORY_TYPE}}</p>
+                    <!-- Ссылка на перевод (генерируется JS) -->
+                    <p id="translation-link" style="color: #aaa; margin-top: 8px; font-size: 0.9em;">
+                        {{TRANSLATION_LINK}}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        {{#if QUOTE}}
+        <!-- Цитата -->
+        <section class="quote-block">
+            <div class="quote-main">
+                <span class="quote-mark">“</span>
+                <p class="quote-text">{{QUOTE}}</p>
+            </div>
+        </section>
+        {{/if}}
+
+        {{#if AUTHOR_NOTE}}
+        <!-- Заметка автора -->
+        <section id="author-note" class="story-author-note">
+            {{AUTHOR_NOTE}}
+        </section>
+        {{/if}}
+
+        <!-- Полный текст -->
+        <section id="story-text" class="story-text" itemprop="articleBody">
+            {{CONTENT}}
+        </section>
+
+        {{#if EDITORIAL_REVIEW}}
+        <!-- Рецензия редакции (аналогично author_note) -->
+        <section id="editorial-review" class="story-author-note" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 30px;">
+            {{#if (eq LANG "en")}}
+                <p style="font-weight: 300; letter-spacing: 1px; margin-bottom: 10px;">Editorial Review</p>
+            {{else}}
+                <p style="font-weight: 300; letter-spacing: 1px; margin-bottom: 10px;">Рецензия редакции</p>
+            {{/if}}
+            {{EDITORIAL_REVIEW}}
+        </section>
+        {{/if}}
+
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        © <span id="copyright-year"></span> Hollow Cuts
+        {{#if (eq LANG "en")}}– author's project{{else}}– авторский проект{{/if}}
+        <br>
+        {{#if (eq LANG "en")}}All rights to the text belong to the author{{else}}Все права на текст принадлежат автору{{/if}}
+    </footer>
+
+</div>
+
+<!-- СКРИПТЫ -->
+<script>
+    (function() {
+        // Параллакс
+        const wall = document.getElementById('parallax-text');
+        if (wall) {
+            window.addEventListener('scroll', function() {
+                wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+            });
+        }
+
+        // Год в подвале
+        const yearSpan = document.getElementById('copyright-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+
+        // Проверка наличия перевода
+        const storyData = document.getElementById('story-data');
+        if (storyData) {
+            const currentLang = storyData.dataset.lang;
+            const currentId = storyData.dataset.id;
+            const otherLang = storyData.dataset.otherLang;
+
+            const jsonUrl = `/content/${otherLang}/stories.json`;
+            fetch(jsonUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error('JSON not found');
+                    return res.json();
+                })
+                .then(data => {
+                    const translation = data.stories.find(s => s.id === currentId);
+                    if (translation) {
+                        const linkContainer = document.getElementById('translation-link');
+                        const linkText = (currentLang === 'ru')
+                            ? 'Эта история доступна на английском – <a href="' + translation.url + '" style="color: ' + (storyData.dataset.themeColor || '#6BCB77') + ';">здесь</a>'
+                            : 'This story is available in Russian – <a href="' + translation.url + '" style="color: ' + (storyData.dataset.themeColor || '#6BCB77') + ';">here</a>';
+                        linkContainer.innerHTML = linkText;
+                    } else {
+                        document.getElementById('translation-link').style.display = 'none';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('translation-link').style.display = 'none';
+                });
+        }
+    })();
+</script>
+
+</body>
+</html>
