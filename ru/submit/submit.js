@@ -73,4 +73,20 @@
         if (yearSpan) yearSpan.textContent = new Date().getFullYear();
     });
 
+    // Синхронизация цветового пикера и текстового поля HEX
+    const colorPicker = document.getElementById('accent_color');
+    const colorHexInput = document.getElementById('accent_color_hex');
+    
+    if (colorPicker && colorHexInput) {
+        colorPicker.addEventListener('input', function() {
+            colorHexInput.value = this.value;
+        });
+        colorHexInput.addEventListener('input', function() {
+            // Валидация HEX-формата
+            if (/^#[0-9a-fA-F]{6}$/.test(this.value)) {
+                colorPicker.value = this.value;
+            }
+        });
+    }
+
 })();
