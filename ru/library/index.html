@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека рассказов · Hollow Cuts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="page">
+
+    <!-- Шапка -->
+    <header class="top-header">
+        <a href="/" class="logo">
+            <img src="/logo.svg" alt="Hollow Cuts">
+        </a>
+        <div class="page-title">. библиотека</div>
+        <div></div>
+    </header>
+
+    <!-- Основной контент библиотеки -->
+    <main class="library-layout" id="library-root">
+
+        <!-- Сюда JS будет вставлять карточки историй -->
+        <div id="stories-container"></div>
+
+        <!-- Пагинация -->
+        <div class="pagination" id="pagination">
+            <div class="pagination-info" id="page-info"></div>
+            <div class="pagination-controls">
+                <button class="pagination-button" id="prev-page" disabled>← Назад</button>
+                <button class="pagination-button" id="next-page">Вперёд →</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        © <span id="copyright-year"></span> Hollow Cuts – авторский проект
+        <br>Все права на тексты принадлежат авторам
+    </footer>
+
+</div>
+
+<script src="library.js" defer></script>
+</body>
+</html>
