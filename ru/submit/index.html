@@ -48,14 +48,13 @@
             <!-- Поле: Название -->
             <div class="form-group">
                 <label for="title">Название <span class="required">*</span></label>
-                <input type="text" id="title" name="title" required placeholder="Придумайте заголовок">
+                <input type="text" id="title" name="title" required placeholder="Заголовок вашего рассказа">
             </div>
 
             <!-- Поле: Текст -->
             <div class="form-group">
                 <label for="content">Текст рассказа <span class="required">*</span></label>
-                <textarea id="content" name="content" rows="12" required placeholder="Введите текст... Можно использовать HTML-теги (p, b, i, etc.)"></textarea>
-                <small>Поддерживается базовое форматирование: &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;em&gt;, &lt;strong&gt;.</small>
+                <textarea id="content" name="content" rows="12" required placeholder="Основной текст истории. Доступны *курсив* и **жирный** текст"></textarea>
             </div>
 
             <!-- Поле: Теги -->
@@ -65,11 +64,18 @@
                 <small>Вводите через запятую</small>
             </div>
 
+            <!-- Поле: Описание автора (bio) -->
+            <div class="form-group">
+                <label for="bio">Описание автора, контекст к истории</label>
+                <input type="text" id="bio" name="bio" placeholder="Контекст к рассказу и/или ваше описание от 3-го лица">
+                <small>Автор - бакалавр МГУ, рассказ был написал после...</small>
+            </div>
+
             <!-- Поле: 18+ -->
             <div class="form-group checkbox-group">
                 <label>
                     <input type="checkbox" id="age_rating" name="age_rating" value="true">
-                    Содержит материал для взрослых (18+)
+                    Содержит материал для взрослых?
                 </label>
             </div>
 
@@ -78,6 +84,16 @@
                 <label for="cover">Обложка (опционально)</label>
                 <input type="file" id="cover" name="cover" accept="image/*">
                 <small>Поддерживаются JPG, PNG, WEBP. Максимальный размер 5 МБ.</small>
+            </div>
+
+            <!-- Поле: Акцентный цвет -->
+            <div class="form-group">
+                <label for="accent_color">Акцентный цвет страницы</label>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <input type="color" id="accent_color" name="accent_color" value="#6BCB77">
+                    <input type="text" id="accent_color_hex" name="accent_color_hex" placeholder="#6BCB77" value="#6BCB77" style="flex:1;">
+                </div>
+                <small>Цвет заголовка на странице рассказа</small>
             </div>
 
             <!-- Капча -->
