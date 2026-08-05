@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отправить рассказ · Hollow Cuts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+    <!-- hCaptcha -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+
+<div class="page">
+
+    <header class="top-header">
+        <a href="/" class="logo">
+            <img src="/logo.svg" alt="Hollow Cuts">
+        </a>
+        <div class="page-title">. отправить рассказ</div>
+        <div></div>
+    </header>
+
+    <main class="submit-layout">
+        <form id="submit-form" novalidate>
+
+            <!-- Поле: Автор -->
+            <div class="form-group">
+                <label for="author">Автор <span class="required">*</span></label>
+                <input type="text" id="author" name="author" required placeholder="Ваше имя или псевдоним">
+            </div>
+
+            <!-- Поле: Email -->
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="для связи и уведомлений">
+            </div>
+
+            <!-- Поле: Язык -->
+            <div class="form-group">
+                <label>Язык <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label><input type="radio" name="language" value="ru" checked> Русский</label>
+                    <label><input type="radio" name="language" value="en"> English</label>
+                </div>
+            </div>
+
+            <!-- Поле: Название -->
+            <div class="form-group">
+                <label for="title">Название <span class="required">*</span></label>
+                <input type="text" id="title" name="title" required placeholder="Придумайте заголовок">
+            </div>
+
+            <!-- Поле: Текст -->
+            <div class="form-group">
+                <label for="content">Текст рассказа <span class="required">*</span></label>
+                <textarea id="content" name="content" rows="12" required placeholder="Введите текст... Можно использовать HTML-теги (p, b, i, etc.)"></textarea>
+                <small>Поддерживается базовое форматирование: &lt;p&gt;, &lt;b&gt;, &lt;i&gt;, &lt;em&gt;, &lt;strong&gt;.</small>
+            </div>
+
+            <!-- Поле: Теги -->
+            <div class="form-group">
+                <label for="tags">Теги</label>
+                <input type="text" id="tags" name="tags" placeholder="например: фантастика, драма, город">
+                <small>Вводите через запятую</small>
+            </div>
+
+            <!-- Поле: 18+ -->
+            <div class="form-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="age_rating" name="age_rating" value="true">
+                    Содержит материал для взрослых (18+)
+                </label>
+            </div>
+
+            <!-- Поле: Обложка -->
+            <div class="form-group">
+                <label for="cover">Обложка (опционально)</label>
+                <input type="file" id="cover" name="cover" accept="image/*">
+                <small>Поддерживаются JPG, PNG, WEBP. Максимальный размер 5 МБ.</small>
+            </div>
+
+            <!-- Капча -->
+            <div class="form-group">
+                <div class="h-captcha" data-sitekey="ВАШ_САЙТКЕЙ_ОТ_HCAPTCHA"></div>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <div class="form-group">
+                <button type="submit" id="submit-btn">Отправить рассказ</button>
+            </div>
+
+            <!-- Сообщение о результате -->
+            <div id="form-message" class="form-message"></div>
+
+        </form>
+    </main>
+
+    <footer>
+        © <span id="copyright-year"></span> hollowcuts.com
+        <br>Все права на тексты принадлежат авторам
+    </footer>
+
+</div>
+
+<script src="submit.js"></script>
+</body>
+</html>
