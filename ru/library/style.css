@@ -1,0 +1,340 @@
+/* ============================================
+   ROOT & BASE
+   ============================================ */
+:root {
+    --bg: #000000;
+    --white: #ffffff;
+    --muted: #8a8a8a;
+    --line: #2a2a2a;
+    --max-width: 1300px;
+    --card-gap: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: Helvetica Neue, Arial, sans-serif;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, .35);
+    padding: 32px 42px 28px;
+    position: relative;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.top-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 30px;
+    margin-bottom: 48px;
+}
+
+.logo img {
+    width: 310px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* ============================================
+   LIBRARY LAYOUT — полная ширина, без параллакса
+   ============================================ */
+.library-layout {
+    position: relative;
+    width: 100%;
+}
+
+/* ============================================
+   СТИЛИ КАРТОЧКИ ИСТОРИИ (журнальный формат)
+   ============================================ */
+.story-card {
+    margin-bottom: var(--card-gap);
+    padding-bottom: var(--card-gap);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.story-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* --- Автор --- */
+.story-card-author {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.story-card-author a {
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.story-card-author a:hover {
+    color: var(--white);
+    text-decoration: none;
+}
+
+/* --- Краткое авторское описание (bio) --- */
+.story-card-bio {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 12px;
+    letter-spacing: 0.2px;
+}
+
+/* --- Название (ссылка на историю) --- */
+.story-card-title {
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin: 4px 0 6px 0;
+}
+
+.story-card-title a {
+    color: var(--white);
+    transition: opacity 0.2s;
+}
+
+.story-card-title a:hover {
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+/* --- Тип рассказа (по длине) --- */
+.story-card-type {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+/* --- Основной текст (excerpt или полный текст) --- */
+.story-card-text {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #dddee3;
+    max-width: 100%;
+    margin-bottom: 16px;
+}
+
+/* --- Теги --- */
+.story-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.story-card-tag {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 2px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.story-card-tag:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+}
+
+/* --- Рецензия редакции (в стиле "комментарий") --- */
+.story-card-review {
+    font-size: 17px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 16px 20px;
+    margin-top: 4px;
+    border-left: 2px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.015);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+}
+
+.story-card-review::before {
+    content: "— ";
+    opacity: 0.5;
+}
+
+/* ============================================
+   ПАГИНАЦИЯ
+   ============================================ */
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 16px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.pagination-info {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.3px;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.pagination-button {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.pagination-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.pagination-button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.pagination-button.active {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #8d8d8d;
+    font-size: 14px;
+}
+
+/* ============================================
+   АДАПТИВ
+   ============================================ */
+@media (max-width: 1100px) {
+    .top-header {
+        grid-template-columns: 1fr;
+    }
+    .page-title {
+        text-align: left;
+    }
+}
+
+@media (max-width: 900px) {
+    body {
+        padding: 24px;
+    }
+    .page {
+        padding: 24px 24px 20px;
+    }
+    .story-card-title {
+        font-size: 34px;
+    }
+    .story-card-text {
+        font-size: 18px;
+    }
+    .story-card-author {
+        font-size: 18px;
+    }
+    .pagination {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .pagination-controls {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+    .page {
+        padding: 16px 16px 16px;
+    }
+    .logo img {
+        width: 200px;
+    }
+    .story-card-title {
+        font-size: 28px;
+    }
+    .story-card-text {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    .story-card-author {
+        font-size: 16px;
+    }
+    .story-card-bio {
+        font-size: 14px;
+    }
+    .story-card-review {
+        font-size: 15px;
+        padding: 12px 16px;
+    }
+    .pagination-button {
+        padding: 6px 14px;
+        font-size: 14px;
+    }
+}
