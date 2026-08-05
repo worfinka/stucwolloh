@@ -86,6 +86,29 @@
       "accepted_by": "Worfi1007",
       "editorial_review": "вроде круто",
       "slug": "posledniy-svet"
+    },
+    {
+      "title": "ITS A TEST S",
+      "author": "testtt",
+      "content": "<p>were попробуем <i>this</i> и <b>это</b> оыоа\r\nыылоалво\r\nмыдво</p>",
+      "language": "ru",
+      "tags": [
+        "еда",
+        "вода",
+        "лалала"
+      ],
+      "age_rating": false,
+      "email": "worfi636@gmail.com",
+      "author_bio": "АВтор сверхений и стундент МелГУ",
+      "accent_color": "#009dff",
+      "id": "2026-08-05-its-a-test-s",
+      "date": "2026-08-05T18:58:12.391167",
+      "url": "/stories/ru/2026-08-05-its-a-test-s/",
+      "word_count": 8,
+      "author_note": "",
+      "accepted_by": "Worfi1007",
+      "editorial_review": "так для виду",
+      "slug": "its-a-test-s"
     }
   ]
 }
