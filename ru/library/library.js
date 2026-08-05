@@ -36,24 +36,24 @@
     // Формирует HTML-карточку одной истории
     function renderStoryCard(story) {
         const type = getStoryType(story.word_count || 0);
-        const excerpt = story.excerpt || stripHtml(story.content).slice(0, 300) + '…';
+        // Показываем полный текст (без обрезания)
+        const displayText = stripHtml(story.content);
         const tagsHtml = (story.tags || []).map(t => `<span class="story-card-tag">${t}</span>`).join('');
         const reviewHtml = story.editorial_review
             ? `<div class="story-card-review">${story.editorial_review}</div>`
             : '';
-
+    
         return `
             <div class="story-card">
                 <div class="story-card-author">
                     <a href="/ru/library?author=${encodeURIComponent(story.author)}">${story.author}</a>
                 </div>
-                <!-- авторское био пока не используется, оставляем место -->
                 <div class="story-card-bio"></div>
                 <h2 class="story-card-title">
                     <a href="${story.url || '/stories/ru/' + story.id + '/'}">${story.title}</a>
                 </h2>
                 <div class="story-card-type">${type}</div>
-                <div class="story-card-text">${excerpt}</div>
+                <div class="story-card-text">${displayText}</div>
                 ${tagsHtml ? `<div class="story-card-tags">${tagsHtml}</div>` : ''}
                 ${reviewHtml}
             </div>
