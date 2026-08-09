@@ -35,13 +35,13 @@
         setLoading(true);
 
         try {
-            // 1. Собираем данные в FormData (для отправки файлов)
-            const payload = new FormData(FORM); // берём все поля из формы
+            // 1. Собираем данные в FormData
+            const payload = new FormData(FORM);
 
             // 2. Отправляем на Worker
             const response = await fetch(WORKER_URL, {
                 method: 'POST',
-                body: payload, // Content-Type выставится автоматически (multipart/form-data)
+                body: payload,
             });
 
             const result = await response.json();
@@ -49,8 +49,12 @@
             if (response.ok) {
                 showMessage('✅ Рассказ успешно отправлен на рассмотрение! Спасибо!', 'success');
                 FORM.reset();
-                // Сброс капчи (если есть)
                 if (window.hcaptcha) window.hcaptcha.reset();
+                // Сброс цвета на дефолтный
+                const colorPicker = document.getElementById('accent_color');
+                const colorHex = document.getElementById('accent_color_hex');
+                if (colorPicker) colorPicker.value = '#6BCB77';
+                if (colorHex) colorHex.value = '#6BCB77';
             } else {
                 const errMsg = result.error || `Ошибка ${response.status}`;
                 showMessage(`❌ Ошибка: ${errMsg}`, 'error');
@@ -76,13 +80,11 @@
     // Синхронизация цветового пикера и текстового поля HEX
     const colorPicker = document.getElementById('accent_color');
     const colorHexInput = document.getElementById('accent_color_hex');
-    
     if (colorPicker && colorHexInput) {
         colorPicker.addEventListener('input', function() {
             colorHexInput.value = this.value;
         });
         colorHexInput.addEventListener('input', function() {
-            // Валидация HEX-формата
             if (/^#[0-9a-fA-F]{6}$/.test(this.value)) {
                 colorPicker.value = this.value;
             }
