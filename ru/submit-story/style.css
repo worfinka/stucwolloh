@@ -159,33 +159,6 @@ a {
     cursor: pointer;
 }
 
-/* Файловый инпут */
-input[type="file"] {
-    color: var(--muted);
-    font-size: 16px;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    padding: 10px 12px;
-    width: 100%;
-    cursor: pointer;
-}
-input[type="file"]::file-selector-button {
-    background: rgba(255,255,255,0.08);
-    border: none;
-    color: var(--white);
-    padding: 8px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 16px;
-    transition: background 0.2s;
-    margin-right: 12px;
-}
-input[type="file"]::file-selector-button:hover {
-    background: rgba(255,255,255,0.15);
-}
-
 /* Кнопка отправки */
 #submit-btn {
     background: var(--white);
@@ -240,26 +213,6 @@ input[type="file"]::file-selector-button:hover {
     color: var(--muted);
 }
 
-/* Дополнительные стили для поля цвета */
-.color-picker-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.color-picker-wrapper input[type="color"] {
-    width: 50px;
-    height: 50px;
-    padding: 0;
-    border: 1px solid var(--input-border);
-    border-radius: 4px;
-    background: transparent;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.color-picker-wrapper input[type="text"] {
-    flex: 1;
-}
 /* ---------- Капча ---------- */
 .h-captcha {
     display: flex;
@@ -306,4 +259,23 @@ footer {
     .form-group textarea {
         font-size: 16px;
     }
+}
+
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.color-picker-wrapper input[type="color"] {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.color-picker-wrapper input[type="text"] {
+    flex: 1;
 }
