@@ -64,11 +64,11 @@
                 <small>Вводите через запятую</small>
             </div>
 
-            <!-- Поле: Описание автора (bio) -->
+            <!-- Поле: Заметка автора (author_note) -->
             <div class="form-group">
-                <label for="bio">Описание автора, контекст к истории</label>
-                <input type="text" id="bio" name="bio" placeholder="Контекст к рассказу и/или ваше описание от 3-го лица">
-                <small>Автор - бакалавр МГУ, рассказ был написал после...</small>
+                <label for="author_note">Заметка автора (контекст)</label>
+                <input type="text" id="author_note" name="author_note" placeholder="Краткий контекст к рассказу или описание от 3-го лица">
+                <small>Например: «Рассказ написан под впечатлением от ночных прогулок»</small>
             </div>
 
             <!-- Поле: 18+ -->
@@ -79,13 +79,6 @@
                 </label>
             </div>
 
-            <!-- Поле: Обложка -->
-            <div class="form-group">
-                <label for="cover">Обложка (опционально)</label>
-                <input type="file" id="cover" name="cover" accept="image/*">
-                <small>Поддерживаются JPG, PNG, WEBP. Максимальный размер 5 МБ.</small>
-            </div>
-
             <!-- Поле: Акцентный цвет -->
             <div class="form-group">
                 <label for="accent_color">Акцентный цвет страницы</label>
@@ -93,8 +86,9 @@
                     <input type="color" id="accent_color" name="accent_color" value="#6BCB77">
                     <input type="text" id="accent_color_hex" name="accent_color_hex" placeholder="#6BCB77" value="#6BCB77">
                 </div>
-                <small>Выберите цвет, который будет использоваться для заголовка.</small>
+                <small>Цвет для заголовка и акцентов на странице рассказа.</small>
             </div>
+
             <!-- Капча -->
             <div class="form-group">
                 <div class="h-captcha" data-sitekey="e8e0462e-677a-451e-95f8-1f8aece2b26c"></div>
