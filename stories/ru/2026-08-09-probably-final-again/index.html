@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#fbdcb1">
+    <title>probably final again . Hollow Cuts</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/jpeg" href="/images/default-cover.jpg">
+    <meta property="og:title" content="probably final again">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hollowcuts.com/stories/ru/2026-08-09-probably-final-again/">
+    <meta property="og:image" content="/images/default-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="story-data" 
+          data-lang="ru" 
+          data-id="2026-08-09-probably-final-again" 
+          data-other-lang="en">
+</head>
+<body>
+<div id="top"></div>
+<div class="page">
+    <div id="parallax-text">PROBABLY FINAL AGAIN PLEASE BE WORKING PROBABLY FINAL AGAIN PLEASE BE WORKING PROBABLY FINAL AGAIN PLEASE BE WORKING PROBABLY FINAL AGAIN PLEASE BE WORKING PROBABLY FINAL AGAIN PLEASE BE WORKING </div>
+    <header class="top-header">
+        <a href="/" class="logo"><img src="/logo.svg" alt="Hollow Cuts"></a>
+        <div class="page-title">. рассказ</div>
+        <div></div>
+    </header>
+    <main class="story-layout" itemscope itemtype="http://schema.org/Article">
+        <section class="story-header">
+            <div id="cover-container" class="story-cover"></div>
+            <div class="story-meta">
+                <h1 id="story-title" style="color: #fbdcb1;" itemprop="headline">probably final again</h1>
+                <div class="story-description">
+                    <p itemprop="author">Автор: Worfi</p>
+                    <p>Теги: please, be working</p>
+                    
+                    <p style="color: #aaa; font-size: 0.9em; margin-top: 6px;">Мини-сага / Дриббл</p>
+                    <p id="translation-link" style="color: #aaa; margin-top: 8px; font-size: 0.9em;"></p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="author-note" class="story-author-note">no context просто работай пж</section>
+        <section id="story-text" class="story-text" itemprop="articleBody"><p>ig</p></section>
+        <div id="gallery-container"></div>
+        
+        <section id="editorial-review" class="story-author-note" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 30px;">
+            <p style="font-weight: 300; letter-spacing: 1px; margin-bottom: 10px;">Рецензия редакции</p>
+            okay
+        </section>
+    
+    </main>
+    <footer>
+        © <span id="copyright-year"></span> hollowcuts.com
+        <br>
+        Все права на текст принадлежат автору
+    </footer>
+</div>
+<script>
+    (function() {
+        // Параллакс
+        const wall = document.getElementById('parallax-text');
+        if (wall) {
+            window.addEventListener('scroll', function() {
+                wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+            });
+        }
+        const yearSpan = document.getElementById('copyright-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Динамическая загрузка обложек и галереи ---
+        const storyData = document.getElementById('story-data');
+        if (storyData) {
+            const currentLang = storyData.dataset.lang;
+            const currentId = storyData.dataset.id;
+            const otherLang = storyData.dataset.otherLang;
+
+            function updateCoverAndGallery(coverList) {
+                const coverContainer = document.getElementById('cover-container');
+                const galleryContainer = document.getElementById('gallery-container');
+                if (!coverContainer) return;
+
+                // Если список пуст или нет картинок – ставим дефолтную
+                if (!coverList || coverList.length === 0) {
+                    coverContainer.innerHTML = '<img src="/images/default-cover.jpg" alt="Обложка" style="width:100%; height:100%; object-fit:cover; aspect-ratio:1;">';
+                    galleryContainer.innerHTML = '';
+                    return;
+                }
+
+                // Первая картинка – обложка
+                const coverImg = coverList[0];
+                coverContainer.innerHTML = '<img src="' + coverImg + '" alt="Обложка" style="width:100%; height:100%; object-fit:cover; aspect-ratio:1;">';
+
+                // Остальные – галерея
+                const galleryImages = coverList.slice(1);
+                if (galleryImages.length === 0) {
+                    galleryContainer.innerHTML = '';
+                    return;
+                }
+
+                let galleryHtml = '<section class="gallery-section"><div class="gallery-title">Галерея</div><div class="gallery-grid">';
+                galleryImages.forEach(img => {
+                    galleryHtml += '<div class="gallery-item"><img src="' + img + '" alt="Фото галереи"></div>';
+                });
+                galleryHtml += '</div></section>';
+                galleryContainer.innerHTML = galleryHtml;
+            }
+
+            // Загружаем JSON для текущего языка
+            const jsonUrl = '/content/' + currentLang + '/stories.json';
+            fetch(jsonUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error('JSON not found');
+                    return res.json();
+                })
+                .then(data => {
+                    const story = data.stories.find(s => s.id === currentId);
+                    if (story) {
+                        const coverList = story.cover || [];
+                        updateCoverAndGallery(coverList);
+                    }
+                })
+                .catch(() => {
+                    // Если JSON не загрузился – ставим дефолтную обложку
+                    updateCoverAndGallery([]);
+                });
+
+            // --- Обработка перевода (существующий код) ---
+            const jsonUrlOther = '/content/' + otherLang + '/stories.json';
+            fetch(jsonUrlOther)
+                .then(res => {
+                    if (!res.ok) throw new Error('JSON not found');
+                    return res.json();
+                })
+                .then(data => {
+                    const translation = data.stories.find(s => s.id === currentId);
+                    if (translation) {
+                        const linkContainer = document.getElementById('translation-link');
+                        const linkText = (currentLang === 'ru')
+                            ? 'Эта история доступна на английском – <a href="' + translation.url + '" style="color: ' + (storyData.dataset.themeColor || '#6BCB77') + ';">здесь</a>'
+                            : 'This story is available in Russian – <a href="' + translation.url + '" style="color: ' + (storyData.dataset.themeColor || '#6BCB77') + ';">here</a>';
+                        linkContainer.innerHTML = linkText;
+                    } else {
+                        document.getElementById('translation-link').style.display = 'none';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('translation-link').style.display = 'none';
+                });
+        }
+    })();
+</script>
+</body>
+</html>
