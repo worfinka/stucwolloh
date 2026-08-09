@@ -84,7 +84,9 @@
       "date": "2026-08-09T10:00:09.617230",
       "url": "/stories/ru/2026-08-09-final-test/",
       "word_count": 3,
-      "cover": [],
+      "cover": [
+        "images/2026-08-09-final-test_20260809102139.jpg"
+      ],
       "accepted_by": "Worfi1007",
       "editorial_review": "we hope it works out for you",
       "slug": "final-test"
