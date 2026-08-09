@@ -67,6 +67,27 @@
       "accepted_by": "Worfi1007",
       "editorial_review": "нам понравилось",
       "slug": "test-storruuuu"
+    },
+    {
+      "title": "FINAL TEST",
+      "author": "Someone",
+      "content": "<p>first final test</p>",
+      "language": "ru",
+      "tags": [
+        "please",
+        "be working"
+      ],
+      "age_rating": false,
+      "author_note": "no context просто работай пж",
+      "accent_color": "#cccccc",
+      "id": "2026-08-09-final-test",
+      "date": "2026-08-09T10:00:09.617230",
+      "url": "/stories/ru/2026-08-09-final-test/",
+      "word_count": 3,
+      "cover": [],
+      "accepted_by": "Worfi1007",
+      "editorial_review": "we hope it works out for you",
+      "slug": "final-test"
     }
   ]
 }
