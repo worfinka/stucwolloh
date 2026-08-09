@@ -24,7 +24,6 @@
             allStories = data.stories || [];
         } catch (err) {
             console.error(err);
-            // Не показываем ошибку пользователю, но поиск не будет работать
         }
     }
 
@@ -44,7 +43,6 @@
             return;
         }
 
-        // Рендерим подсказки
         let html = '';
         results.forEach(s => {
             html += `
@@ -69,18 +67,15 @@
         storyIdInput.value = id;
         selectedStoryId = id;
         suggestionsDiv.classList.remove('active');
-        // Убираем фокус, чтобы список закрылся
         searchInput.blur();
     });
 
-    // Закрытие списка при потере фокуса
     searchInput.addEventListener('blur', function() {
         setTimeout(() => {
             suggestionsDiv.classList.remove('active');
         }, 200);
     });
 
-    // Ввод в поле поиска
     searchInput.addEventListener('input', function() {
         const query = this.value.trim();
         if (query === '') {
@@ -92,10 +87,7 @@
         searchStories(query);
     });
 
-    // Предотвращаем отправку формы, если не выбрана история
-    // Валидация будет в handleSubmit
-
-    // ===== Загрузка файла и отображение имени =====
+    // ===== Загрузка файла =====
     const fileInput = document.getElementById('photo-file');
     const fileNameDisplay = document.getElementById('file-name');
 
@@ -115,7 +107,6 @@
     });
 
     // ===== Вспомогательные функции =====
-
     function showMessage(text, type = 'info') {
         MESSAGE.textContent = text;
         MESSAGE.className = 'form-message ' + type;
@@ -134,15 +125,13 @@
     }
 
     // ===== Основная отправка =====
-
     async function handleSubmit(e) {
         e.preventDefault();
         clearMessage();
         setLoading(true);
 
         try {
-            // Проверка капчи (она будет в FormData, но Worker проверит)
-            // Проверяем, выбрана ли история
+            // 1. Проверка выбора истории
             const storyId = storyIdInput.value.trim();
             if (!storyId) {
                 showMessage('❌ Пожалуйста, выберите историю из списка', 'error');
@@ -150,7 +139,7 @@
                 return;
             }
 
-            // Проверяем, что файл выбран
+            // 2. Проверка файла
             const file = fileInput.files[0];
             if (!file) {
                 showMessage('❌ Выберите файл изображения', 'error');
@@ -158,14 +147,22 @@
                 return;
             }
 
-            // Создаём FormData
-            const payload = new FormData();
-            payload.append('story_id', storyId);
-            payload.append('author', document.getElementById('photo-author').value.trim() || 'Неизвестен');
-            payload.append('image', file);
-            // hCaptcha токен будет добавлен автоматически, т.к. форма содержит элемент h-captcha
+            // 3. Создаём FormData из всей формы (включая капчу)
+            const payload = new FormData(FORM);
 
-            // Отправляем на Worker
+            // 4. Обновляем поля, чтобы они точно соответствовали нужным значениям
+            payload.set('story_id', storyId);
+            payload.set('author', document.getElementById('photo-author').value.trim() || 'Неизвестен');
+
+            // 5. Убеждаемся, что файл передан корректно
+            // Если в форме уже есть input[type="file"], то он уже есть в payload
+            // Но если мы используем new FormData(FORM), то файл уже добавлен.
+            // Проверим: если файл не добавился, можно перезаписать
+            // Удаляем старый файл и добавляем новый
+            payload.delete('image');
+            payload.append('image', file);
+
+            // 6. Отправляем на Worker
             const response = await fetch(WORKER_URL, {
                 method: 'POST',
                 body: payload,
@@ -193,7 +190,6 @@
     }
 
     // ===== Инициализация =====
-
     FORM.addEventListener('submit', handleSubmit);
 
     document.addEventListener('DOMContentLoaded', () => {
