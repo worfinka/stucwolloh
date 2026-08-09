@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить фото · Hollow Cuts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+    <!-- hCaptcha -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+
+<div class="page">
+
+    <header class="top-header">
+        <a href="/" class="logo">
+            <img src="/logo.svg" alt="Hollow Cuts">
+        </a>
+        <div class="page-title">. добавить фото</div>
+        <div></div>
+    </header>
+
+    <main class="submit-layout">
+        <form id="submit-form" novalidate>
+
+            <!-- Поле поиска истории -->
+            <div class="form-group">
+                <label for="story-search">Выберите историю <span class="required">*</span></label>
+                <div class="search-wrapper">
+                    <input type="text" id="story-search" placeholder="Начните вводить название..." autocomplete="off">
+                    <input type="hidden" id="story-id" name="story_id">
+                    <div id="suggestions" class="suggestions-list"></div>
+                </div>
+                <small>Найдите историю по названию</small>
+            </div>
+
+            <!-- Поле: автор фото -->
+            <div class="form-group">
+                <label for="photo-author">Автор фото</label>
+                <input type="text" id="photo-author" name="author" placeholder="Ваше имя или псевдоним">
+            </div>
+
+            <!-- Поле: загрузка файла -->
+            <div class="form-group">
+                <label for="photo-file">Файл изображения <span class="required">*</span></label>
+                <input type="file" id="photo-file" name="image" accept="image/*" required>
+                <small>Максимум 5 МБ. Поддерживаются JPG, PNG, WEBP.</small>
+                <div id="file-name" class="file-name"></div>
+            </div>
+
+            <!-- Капча -->
+            <div class="form-group">
+                <div class="h-captcha" data-sitekey="e8e0462e-677a-451e-95f8-1f8aece2b26c"></div>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <div class="form-group">
+                <button type="submit" id="submit-btn">Отправить фото</button>
+            </div>
+
+            <!-- Сообщение о результате -->
+            <div id="form-message" class="form-message"></div>
+
+        </form>
+    </main>
+
+    <footer>
+        © <span id="copyright-year"></span> hollowcuts.com
+        <br>Все права на тексты принадлежат авторам
+    </footer>
+
+</div>
+
+<script src="submit-image.js"></script>
+</body>
+</html>
