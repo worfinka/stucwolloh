@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#bfbfbf">
+    <title>ITS A TEST S . Hollow Cuts</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" type="image/jpeg" href="/images/default-cover.jpg">
+    <meta property="og:title" content="ITS A TEST S">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hollowcuts.com/stories/ru/2026-08-09-its-a-test-s/">
+    <meta property="og:image" content="https://hollowcuts.com/images/default-cover.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="story-data" 
+          data-lang="ru" 
+          data-id="2026-08-09-its-a-test-s" 
+          data-other-lang="en">
+</head>
+<body>
+<div id="top"></div>
+<div class="page">
+    <div id="parallax-text">ITS A TEST S TRUTH FORREAL BASED ON REAL EVENTS ITS A TEST S TRUTH FORREAL BASED ON REAL EVENTS ITS A TEST S TRUTH FORREAL BASED ON REAL EVENTS ITS A TEST S TRUTH FORREAL BASED ON REAL EVENTS ITS A TEST S TRUTH FORREAL BASED ON REAL EVENTS </div>
+    <header class="top-header">
+        <a href="/" class="logo"><img src="/logo.svg" alt="Hollow Cuts"></a>
+        <div class="page-title">. рассказ</div>
+        <div></div>
+    </header>
+    <main class="story-layout" itemscope itemtype="http://schema.org/Article">
+        <section class="story-header">
+            <img id="cover" class="story-cover" src="/images/default-cover.jpg" alt="ITS A TEST S" itemprop="image">
+            <div class="story-meta">
+                <h1 id="story-title" style="color: #bfbfbf;" itemprop="headline">ITS A TEST S</h1>
+                <div class="story-description">
+                    <p itemprop="author">Автор: Worfi</p>
+                    <p>Теги: truth, forreal, based on real events</p>
+                    <p>18+</p>
+                    <p style="color: #aaa; font-size: 0.9em; margin-top: 6px;">Мини-сага / Дриббл</p>
+                    <p id="translation-link" style="color: #aaa; margin-top: 8px; font-size: 0.9em;"></p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="author-note" class="story-author-note">TEST ЗАмтетки автора</section>
+        <section id="story-text" class="story-text" itemprop="articleBody"><p>LEVI IS HOT</p></section>
+        
+        
+        <section id="editorial-review" class="story-author-note" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 30px;">
+            <p style="font-weight: 300; letter-spacing: 1px; margin-bottom: 10px;">Рецензия редакции</p>
+            Наверное это так.
+        </section>
+    
+    </main>
+    <footer>
+        © <span id="copyright-year"></span> hollowcuts.com
+        <br>
+        Все права на текст принадлежат автору
+    </footer>
+</div>
+<script>
+    (function() {
+        const wall = document.getElementById('parallax-text');
+        if (wall) {
+            window.addEventListener('scroll', function() {
+                wall.style.transform = 'translateY(' + (window.scrollY * 0.25) + 'px)';
+            });
+        }
+        const yearSpan = document.getElementById('copyright-year');
+        if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
+        }
+        const storyData = document.getElementById('story-data');
+        if (storyData) {
+            const currentLang = storyData.dataset.lang;
+            const currentId = storyData.dataset.id;
+            const otherLang = storyData.dataset.otherLang;
+            const jsonUrl = `/content/${otherLang}/stories.json`;
+            fetch(jsonUrl)
+                .then(res => {
+                    if (!res.ok) throw new Error('JSON not found');
+                    return res.json();
+                })
+                .then(data => {
+                    const translation = data.stories.find(s => s.id === currentId);
+                    if (translation) {
+                        const linkContainer = document.getElementById('translation-link');
+                        const linkText = (currentLang === 'ru')
+                            ? 'Эта история доступна на английском – <a href="' + translation.url + '" style="color: ' + (storyData.dataset.themeColor || '#6BCB77') + ';">здесь</a>'
+                            : 'This story is available in Russian – <a href="' + translation.url + '" style="color: ' + (storyData.dataset.themeColor || '#6BCB77') + ';">here</a>';
+                        linkContainer.innerHTML = linkText;
+                    } else {
+                        document.getElementById('translation-link').style.display = 'none';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('translation-link').style.display = 'none';
+                });
+        }
+    })();
+</script>
+</body>
+</html>
