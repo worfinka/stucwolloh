@@ -114,6 +114,28 @@
       "accepted_by": "Worfi1007",
       "editorial_review": "okay",
       "slug": "probably-final-again"
+    },
+    {
+      "title": "История с паролем",
+      "author": "Ворфинка",
+      "content": "<p>Попробуем галерею</p>",
+      "language": "ru",
+      "tags": [
+        "ну",
+        "тест",
+        "да"
+      ],
+      "age_rating": false,
+      "author_note": "no context просто работай пж",
+      "accent_color": "#cc0000",
+      "id": "2026-08-10-istoriya-s-parolem",
+      "date": "2026-08-10T09:05:08.625659",
+      "url": "/stories/ru/2026-08-10-istoriya-s-parolem/",
+      "word_count": 2,
+      "cover": [],
+      "accepted_by": "Worfi1007",
+      "editorial_review": "Ворфинка - первый автор нашего сайта",
+      "slug": "istoriya-s-parolem"
     }
   ]
 }
