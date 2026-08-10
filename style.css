@@ -150,7 +150,10 @@ img {
 
 /* ---------- Галерея ---------- */
 .gallery-section {
-    margin: 40px 0 30px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);  /* такая же линия, как у рецензии */
+    padding-top: 20px;
+    margin-top: 30px;
+    max-width: 100%; /* не выходит за пределы родителя */
 }
 
 .gallery-title {
@@ -159,18 +162,17 @@ img {
     letter-spacing: 1px;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding-bottom: 8px;
+    /* убрали border-bottom – теперь линия только сверху у всего блока */
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); /* увеличен размер в 2 раза */
     gap: 16px;
 }
 
 .gallery-item {
-    aspect-ratio: 1;
+    aspect-ratio: 1; /* для квадратной сетки */
     overflow: hidden;
     border-radius: 4px;
     background: #111;
@@ -179,7 +181,7 @@ img {
 .gallery-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* показываем всю картинку без обрезки */
     transition: transform 0.3s ease;
 }
 
@@ -190,11 +192,10 @@ img {
 /* Адаптив для галереи */
 @media (max-width: 600px) {
     .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* на мобильных чуть меньше */
         gap: 10px;
     }
 }
-
 /* ---------- Подвал ---------- */
 footer {
     text-align: center;
